@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as NotificationRouteImport } from './routes/notification'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as CustomersRouteImport } from './routes/customers'
+import { Route as AddCustomerRouteImport } from './routes/add-customer'
 import { Route as IndexRouteImport } from './routes/index'
 
+const NotificationRoute = NotificationRouteImport.update({
+  id: '/notification',
+  path: '/notification',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomersRoute = CustomersRouteImport.update({
+  id: '/customers',
+  path: '/customers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AddCustomerRoute = AddCustomerRouteImport.update({
+  id: '/add-customer',
+  path: '/add-customer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/add-customer': typeof AddCustomerRoute
+  '/customers': typeof CustomersRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/notification': typeof NotificationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/add-customer': typeof AddCustomerRoute
+  '/customers': typeof CustomersRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/notification': typeof NotificationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/add-customer': typeof AddCustomerRoute
+  '/customers': typeof CustomersRoute
+  '/home': typeof HomeRoute
+  '/login': typeof LoginRoute
+  '/notification': typeof NotificationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/add-customer'
+    | '/customers'
+    | '/home'
+    | '/login'
+    | '/notification'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/add-customer'
+    | '/customers'
+    | '/home'
+    | '/login'
+    | '/notification'
+  id:
+    | '__root__'
+    | '/'
+    | '/add-customer'
+    | '/customers'
+    | '/home'
+    | '/login'
+    | '/notification'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AddCustomerRoute: typeof AddCustomerRoute
+  CustomersRoute: typeof CustomersRoute
+  HomeRoute: typeof HomeRoute
+  LoginRoute: typeof LoginRoute
+  NotificationRoute: typeof NotificationRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/notification': {
+      id: '/notification'
+      path: '/notification'
+      fullPath: '/notification'
+      preLoaderRoute: typeof NotificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/customers': {
+      id: '/customers'
+      path: '/customers'
+      fullPath: '/customers'
+      preLoaderRoute: typeof CustomersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/add-customer': {
+      id: '/add-customer'
+      path: '/add-customer'
+      fullPath: '/add-customer'
+      preLoaderRoute: typeof AddCustomerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +157,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AddCustomerRoute: AddCustomerRoute,
+  CustomersRoute: CustomersRoute,
+  HomeRoute: HomeRoute,
+  LoginRoute: LoginRoute,
+  NotificationRoute: NotificationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
